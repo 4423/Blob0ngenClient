@@ -5,9 +5,303 @@
     xmlns:local="using:Blob0ngenClient.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
+    xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:m="using:Blob0ngenClient.Models"
+    xmlns:vm="using:Blob0ngenClient.ViewModels"
+    xmlns:c="using:Blob0ngenClient.Controls"
+    mc:Ignorable="d"
+    x:Name="Page">
+
+    <Page.Resources>
+        <Style x:Key="CommandBarButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Height" Value="64"/>
+            <Setter Property="Width" Value="45"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="FontSize" Value="19"/>
+        </Style>
+        <Style x:Key="FilteringTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="SelectedIndex" Value="0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="CadetBlue"/>
+            <Setter Property="Margin" Value="1 -7"/>
+            <Setter Property="Padding" Value="5 0 -5 0"/>
+        </Style>
+        <ControlTemplate x:Key="ListViewItemControlTemplate" TargetType="ListViewItem">
+            <ListViewItemPresenter
+                SelectionCheckMarkVisualEnabled="True"
+                FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}"
+                FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
+                PointerOverBackground="#d9d9d9"
+                PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
+                PressedBackground="#aeaeae"
+                SelectedBackground="#0078d7"
+                SelectedForeground="White"
+                SelectedPointerOverBackground="#005a9e"
+                SelectedPressedBackground="#00487e"
+                DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
+                DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
+                DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}"
+                DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
+                ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
+                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                ContentMargin="{TemplateBinding Padding}"                                                    
+                CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                CheckMode="Inline"
+                RevealBackground="{ThemeResource ListViewItemRevealBackground}"
+                RevealBorderThickness="{ThemeResource ListViewItemRevealBorderThemeThickness}"
+                RevealBorderBrush="{ThemeResource ListViewItemRevealBorderBrush}"/>
+        </ControlTemplate>
+        <Storyboard x:Key="fadeInDownloadProgressPanelStoryboard">
+            <FadeInThemeAnimation Storyboard.TargetName="downloadProgressPanel"/>
+        </Storyboard>
+        <Storyboard x:Key="fadeOutDownloadProgressPanelStoryboard">
+            <FadeOutThemeAnimation Storyboard.TargetName="downloadProgressPanel"/>
+        </Storyboard>
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Pivot>
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock Text="曲" FontSize="20"/>
+                </PivotItem.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="160"/>
+                            <ColumnDefinition Width="200"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                            <TextBlock Text="並べ替え:"
+                                       Style="{StaticResource FilteringTextBlockStyle}"/>
+                            <ComboBox ItemsSource="{x:Bind ViewModel.TrackOrderItems}"
+                                      SelectedItem="{x:Bind ViewModel.SelectedTrackOrderItem, Mode=TwoWay}"
+                                      DisplayMemberPath="Key"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <TextBlock Text="絞り込み:"
+                                       Margin="20 0 0 0" 
+                                       Style="{StaticResource FilteringTextBlockStyle}"/>
+                            <ComboBox ItemsSource="{x:Bind ViewModel.TrackFilterItems}"
+                                      SelectedItem="{x:Bind ViewModel.SelectedTrackFilterItem, Mode=TwoWay}"
+                                      DisplayMemberPath="Key"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <c:AlternatingRowListView x:Name="trackListView"
+                                                  ItemsSource="{x:Bind ViewModel.Tracks, Mode=OneWay}"
+                                                  EvenColor="#f2f2f2"
+                                                  OddColor="Transparent">
+                            <c:AlternatingRowListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="Template" Value="{StaticResource ListViewItemControlTemplate}"/>
+                                </Style>
+                            </c:AlternatingRowListView.ItemContainerStyle>
+                            <c:AlternatingRowListView.ItemTemplate>
+                                <DataTemplate x:DataType="m:Music">
+                                    <Grid>
+                                        <Grid.Resources>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="Margin" Value="10 0"/>
+                                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                            </Style>
+                                        </Grid.Resources>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="3*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="3*"/>
+                                            <ColumnDefinition Width="60"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Grid.Column="0"
+                                                Height="{ThemeResource ListViewItemMinHeight}"
+                                                Width="{ThemeResource ListViewItemMinHeight}"
+                                                Command="{Binding ViewModel.ButtonClickCommand, ElementName=Page}"
+                                                CommandParameter="{Binding}"
+                                                Background="Transparent"
+                                                Content="&#xE118;"
+                                                FontFamily="Segoe MDL2 Assets"/>
+                                        <TextBlock Grid.Column="1" Text="{x:Bind Title}" x:Name="title"/>
+                                        <TextBlock Grid.Column="2" Text="{x:Bind Artist}"/>
+                                        <TextBlock Grid.Column="3" Text="{x:Bind Album}"/>
+                                        <TextBlock Grid.Column="4" Text="{x:Bind Date}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </c:AlternatingRowListView.ItemTemplate>
+                        </c:AlternatingRowListView>
+                    </Grid>
+                </Grid>
+            </PivotItem>
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock Text="アルバム" FontSize="20"/>
+                </PivotItem.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="160"/>
+                            <ColumnDefinition Width="200"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                            <TextBlock Text="並べ替え:"
+                                       Style="{StaticResource FilteringTextBlockStyle}"/>
+                            <ComboBox ItemsSource="{x:Bind ViewModel.OrderItems}"
+                                      SelectedItem="{x:Bind ViewModel.SelectedOrderItem, Mode=TwoWay}"
+                                      DisplayMemberPath="Key"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                            <TextBlock Text="絞り込み:"
+                                       Margin="20 0 0 0" 
+                                       Style="{StaticResource FilteringTextBlockStyle}"/>
+                            <ComboBox ItemsSource="{x:Bind ViewModel.FilterItems}"
+                                      SelectedItem="{x:Bind ViewModel.SelectedFilterItem, Mode=TwoWay}"
+                                      DisplayMemberPath="Key"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <GridView Grid.Row="1"
+                              ItemsSource="{x:Bind ViewModel.Albums, Mode=OneWay}"
+                              ItemContainerStyle="{ThemeResource GridViewItemRevealBackgroundShowsAboveContentStyle}">
+                        <GridView.ItemTemplate>
+                            <DataTemplate x:DataType="m:Music">
+                                <Grid Width="160" Height="225" Margin="5" x:Name="albumPanel" 
+                                            PointerEntered="AlbumGridViewItemPointerEntered"
+                                            PointerExited="AlbumGridViewItemPointerExited">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="160"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
+                                    
+                                    <Image Grid.Row="0" Stretch="Uniform">
+                                        <Image.Source>
+                                            <BitmapImage DecodePixelWidth="300"
+                                                         UriSource="{Binding CoverArtPath, TargetNullValue={StaticResource defaultCoverArtUrl}}">
+                                            </BitmapImage>
+                                        </Image.Source>
+                                    </Image>
+                                    <Button Grid.Row="0" FontFamily="Segoe MDL2 Assets" Content="&#xE118;" 
+                                            Command="{Binding ViewModel.AlbumDownloadButtonClickCommand, ElementName=Page}"
+                                            CommandParameter="{Binding}"
+                                            FontSize="19"
+                                            Width="50"
+                                            HorizontalAlignment="Center" 
+                                            RequestedTheme="Dark"
+                                            Visibility="Collapsed">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Grid>
+                                                    <Path Stretch="Uniform" UseLayoutRounding="False"
+                                                          Fill="{ThemeResource SystemControlChromeHighAcrylicElementMediumBrush}">
+                                                        <Path.Data>
+                                                            <EllipseGeometry RadiusX="1" RadiusY="1"/>
+                                                        </Path.Data>
+                                                    </Path>
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                    <TextBlock Grid.Row="1"
+                                               Text="{x:Bind Album}"
+                                               TextWrapping="Wrap"
+                                               MaxHeight="40"
+                                               FontWeight="Bold"
+                                               Margin="0 5 0 2"/>
+                                    <TextBlock Grid.Row="2"
+                                               Text="{x:Bind AlbumArtist}"
+                                               Foreground="Gray"
+                                               FontSize="13"/>
+                                </Grid>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+                </Grid>
+            </PivotItem>
+        </Pivot>
+
+        <Grid x:Name="downloadProgressPanel"
+              VerticalAlignment="Bottom"
+              Height="64"
+              Margin="-12 0"
+              RequestedTheme="Dark">
+            <Grid Background="{ThemeResource SystemControlAccentAcrylicElementAccentMediumHighBrush}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="0" Margin="7">
+                    <Image.Source>
+                        <BitmapImage UriSource="{Binding ViewModel.DownloadingMusic.CoverArtPath, ElementName=Page,
+                                                TargetNullValue={StaticResource defaultCoverArtUrl}}"
+                                     DecodePixelWidth="120"/>
+                    </Image.Source>
+                </Image>
+                <StackPanel Grid.Column="1" Margin="1 0 0 5" VerticalAlignment="Center">
+                    <TextBlock Text="{x:Bind ViewModel.DownloadingMusic.Title, Mode=OneWay}" FontSize="16"/>
+                    <TextBlock Text="{x:Bind ViewModel.DownloadingMusic.Artist, Mode=OneWay}" FontSize="13"/>
+                </StackPanel>
+                <Grid Grid.Column="2" VerticalAlignment="Center" Margin="7 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <ProgressBar Grid.Column="1"
+                                 Value="{x:Bind ViewModel.DownloadProgressValue, Mode=OneWay}" 
+                                 Maximum="{x:Bind ViewModel.DownloadProgressMaximum, Mode=OneWay}"
+                                 Margin="10 0"
+                                 Foreground="White"/>
+                    <TextBlock Grid.Column="2">
+                        <Run Text="{x:Bind ViewModel.DownloadProgressValue, Mode=OneWay}"/>
+                        <Run Text="%"/>
+                    </TextBlock>
+                </Grid>
+                <StackPanel Grid.Column="3" Orientation="Horizontal">
+                    <Button Content="&#xE711;" Style="{StaticResource CommandBarButtonStyle}"/>
+                    <Button Content="&#xE10C;" Style="{StaticResource CommandBarButtonStyle}">
+                        <Button.Flyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="nigiyakashi1"/>
+                                <MenuFlyoutItem Text="nigiyakashi2"/>
+                            </MenuFlyout>
+                        </Button.Flyout>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
     </Grid>
+
+    <Interactivity:Interaction.Behaviors>
+        <Interactions:DataTriggerBehavior Binding="{x:Bind ViewModel.IsOpenDownloadPanel, Mode=OneWay}" Value="True">
+            <vm:ControlStoryboardAction Storyboard="{StaticResource fadeInDownloadProgressPanelStoryboard}"/>
+        </Interactions:DataTriggerBehavior>
+        <Interactions:DataTriggerBehavior Binding="{x:Bind ViewModel.IsOpenDownloadPanel, Mode=OneWay}" Value="False">
+            <vm:ControlStoryboardAction Storyboard="{StaticResource fadeOutDownloadProgressPanelStoryboard}"/>
+        </Interactions:DataTriggerBehavior>
+    </Interactivity:Interaction.Behaviors>
 </Page>
