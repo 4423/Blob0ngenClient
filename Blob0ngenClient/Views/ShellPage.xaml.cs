@@ -20,6 +20,9 @@ namespace Blob0ngenClient.Views
         public ShellPage()
         {
             this.InitializeComponent();
+
+            ContentFrame.Navigate(typeof(MusicPage));
+            NavView.SelectedItem = NavView.MenuItems.First();
         }
 
         private void NavViewSelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
