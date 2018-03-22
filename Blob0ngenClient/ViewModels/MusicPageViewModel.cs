@@ -98,10 +98,9 @@ namespace Blob0ngenClient.ViewModels
                 Artist = music.AlbumArtist,
                 CoverArtPath = music.CoverArtPath
             };
-            
-            var albumUrls = Tracks.Where(x => x.Album == music.Album)
-                            .Select(x => Uri.UnescapeDataString(x.BlobPath))
-                            .ToList();
+
+            var album = Tracks.Where(x => x.Album == music.Album);
+            var albumUrls = album.Select(x => Uri.UnescapeDataString(x.BlobPath)).ToList();
 
             bool isCanceled = await FileDownloadHelper.DownloadToSelectedFolderAsync(
                 folderDialogService, albumUrls, BlobDownloadProgressChanged);
@@ -109,6 +108,14 @@ namespace Blob0ngenClient.ViewModels
             if (isCanceled)
             {
                 ResetDownloadProgressPanel();
+            }
+            else
+            {
+                var tracks = album.Select(x => new DownloadedTrack(x.ID, DateTime.Now));
+                foreach (var track in tracks)
+                {
+                    DownloadedTrackAccess.Insert(track);
+                }
             }
         }
 
@@ -129,6 +136,10 @@ namespace Blob0ngenClient.ViewModels
             if (isCanceled)
             {
                 ResetDownloadProgressPanel();
+            }
+            else
+            {
+                DownloadedTrackAccess.Insert(new DownloadedTrack(item.ID, DateTime.Now));
             }
         }
 
