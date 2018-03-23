@@ -5,8 +5,43 @@
     xmlns:local="using:Blob0ngenClient.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:c="using:Blob0ngenClient.Controls"
+    xmlns:m="using:Blob0ngenClient.Models"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+          Margin="12 30 12 12">
+        <c:AlternatingRowListView ItemsSource="{x:Bind ViewModel.DownloadedTracks, Mode=OneWay}"
+                                  EvenColor="#f2f2f2" OddColor="Transparent">
+            <c:AlternatingRowListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Padding" Value="0"/>
+                </Style>
+            </c:AlternatingRowListView.ItemContainerStyle>
+            <c:AlternatingRowListView.ItemTemplate>
+                <DataTemplate x:DataType="m:Music">
+                    <Grid>
+                        <Grid.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Margin" Value="10 0"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </Grid.Resources>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="60"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="1" Text="{x:Bind Title}"/>
+                        <TextBlock Grid.Column="2" Text="{x:Bind Artist}"/>
+                        <TextBlock Grid.Column="3" Text="{x:Bind Album}"/>
+                        <TextBlock Grid.Column="4" Text="{x:Bind Date}"/>
+                    </Grid>
+                </DataTemplate>
+            </c:AlternatingRowListView.ItemTemplate>
+        </c:AlternatingRowListView>
     </Grid>
 </Page>

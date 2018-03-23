@@ -107,6 +107,7 @@
     <Compile Include="Tests\DummyAccess.cs" />
     <Compile Include="ViewModels\ControlStoryboardAction.cs" />
     <Compile Include="ViewModels\MusicPageViewModel.cs" />
+    <Compile Include="ViewModels\RecentPageViewModel.cs" />
     <Compile Include="Views\MusicPage.xaml.cs">
       <DependentUpon>MusicPage.xaml</DependentUpon>
     </Compile>

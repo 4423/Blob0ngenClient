@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Blob0ngenClient.Models;
+using Blob0ngenClient.Tests;
+using Blob0ngenClient.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +25,13 @@ namespace Blob0ngenClient.Views
     /// </summary>
     public sealed partial class RecentPage : Page
     {
+        public RecentPageViewModel ViewModel { get; }
+#if DEBUG
+            = new RecentPageViewModel(new DummyAccess());
+#else
+            = new RecentPageViewModel(new SqlAccess(App.SqlDatabaseConnectionString));
+#endif
+
         public RecentPage()
         {
             this.InitializeComponent();
