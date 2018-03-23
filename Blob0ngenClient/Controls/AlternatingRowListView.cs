@@ -17,33 +17,8 @@ namespace Blob0ngenClient.Controls
         {
             DefaultStyleKey = typeof(ListView);
             Items.VectorChanged += OnItemsVectorChanged;
-            SelectionChanged += OnSelectionChanged;
         }
-
-
-        int prevSelectedIndex = -1;
-        private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // 選択行の RequestedTheme を Dark にする
-            if (sender is AlternatingRowListView listview)
-            {
-                int index = listview.SelectedIndex;
-                if (listview.ContainerFromIndex(index) is ListViewItem container)
-                {
-                    container.RequestedTheme = ElementTheme.Dark;
-                }
-
-                if (prevSelectedIndex != -1 && prevSelectedIndex != index)
-                {
-                    if (listview.ContainerFromIndex(prevSelectedIndex) is ListViewItem prevContainer)
-                    {
-                        prevContainer.RequestedTheme = ElementTheme.Light;
-                    }
-                }
-                prevSelectedIndex = index;
-            }
-        }
-
+        
 
         private void OnItemsVectorChanged(IObservableVector<object> sender, IVectorChangedEventArgs args)
         {

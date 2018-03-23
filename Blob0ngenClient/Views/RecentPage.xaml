@@ -12,7 +12,8 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
           Margin="12 30 12 12">
         <c:AlternatingRowListView ItemsSource="{x:Bind ViewModel.DownloadedTracks, Mode=OneWay}"
-                                  EvenColor="#f2f2f2" OddColor="Transparent">
+                                  EvenColor="{ThemeResource SystemControlBackgroundListLowBrush}"
+                                  OddColor="Transparent">
             <c:AlternatingRowListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
