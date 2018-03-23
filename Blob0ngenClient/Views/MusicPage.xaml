@@ -28,38 +28,10 @@
             <Setter Property="SelectedIndex" Value="0"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="FontSize" Value="13"/>
-            <Setter Property="Foreground" Value="CadetBlue"/>
+            <Setter Property="Foreground" Value="{ThemeResource SystemAccentColorDark1}"/>
             <Setter Property="Margin" Value="1 -7"/>
             <Setter Property="Padding" Value="5 0 -5 0"/>
         </Style>
-        <ControlTemplate x:Key="ListViewItemControlTemplate" TargetType="ListViewItem">
-            <ListViewItemPresenter
-                SelectionCheckMarkVisualEnabled="True"
-                FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}"
-                FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}"
-                PlaceholderBackground="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}"
-                PointerOverBackground="#d9d9d9"
-                PointerOverForeground="{ThemeResource SystemControlHighlightAltBaseHighBrush}"
-                PressedBackground="#aeaeae"
-                SelectedBackground="#0078d7"
-                SelectedForeground="White"
-                SelectedPointerOverBackground="#005a9e"
-                SelectedPressedBackground="#00487e"
-                DisabledOpacity="{ThemeResource ListViewItemDisabledThemeOpacity}"
-                DragOpacity="{ThemeResource ListViewItemDragThemeOpacity}"
-                DragBackground="{ThemeResource ListViewItemDragBackgroundThemeBrush}"
-                DragForeground="{ThemeResource ListViewItemDragForegroundThemeBrush}"
-                ReorderHintOffset="{ThemeResource ListViewItemReorderHintThemeOffset}"
-                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                ContentMargin="{TemplateBinding Padding}"                                                    
-                CheckBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
-                CheckBoxBrush="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
-                CheckMode="Inline"
-                RevealBackground="{ThemeResource ListViewItemRevealBackground}"
-                RevealBorderThickness="{ThemeResource ListViewItemRevealBorderThemeThickness}"
-                RevealBorderBrush="{ThemeResource ListViewItemRevealBorderBrush}"/>
-        </ControlTemplate>
         <Storyboard x:Key="fadeInDownloadProgressPanelStoryboard">
             <FadeInThemeAnimation Storyboard.TargetName="downloadProgressPanel"/>
         </Storyboard>
@@ -111,7 +83,6 @@
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                     <Setter Property="Padding" Value="0"/>
-                                    <Setter Property="Template" Value="{StaticResource ListViewItemControlTemplate}"/>
                                 </Style>
                             </c:AlternatingRowListView.ItemContainerStyle>
                             <c:AlternatingRowListView.ItemTemplate>
