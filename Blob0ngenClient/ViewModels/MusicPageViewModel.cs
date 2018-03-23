@@ -28,6 +28,8 @@ namespace Blob0ngenClient.ViewModels
             defaultAlbums = Tracks.GroupBy(x => x.Album).Select(x => x.First()).ToList();
             Albums = defaultAlbums;
 
+            downloadedTracks = DownloadedTrackAccess.Get();
+
             KeyValuePair<string, Func<IEnumerable<Music>>> Add(string str, Func<IEnumerable<Music>> func) 
                 => new KeyValuePair<string, Func<IEnumerable<Music>>>(str, func);
 
@@ -43,8 +45,8 @@ namespace Blob0ngenClient.ViewModels
             FilterItems = new List<KeyValuePair<string, Func<IEnumerable<Music>>>>()
             {
                 Add("すべて", () => defaultAlbums),
-                Add("ダウンロード済み", () => defaultAlbums.Where(x => downloadedItems.Contains(x.ID))),
-                Add("未ダウンロード", () => defaultAlbums.Where(x => !downloadedItems.Contains(x.ID)))
+                Add("ダウンロード済み", () => defaultAlbums.Where(x => downloadedTracks.Any(y => y.TrackId == x.ID))),
+                Add("未ダウンロード", () => defaultAlbums.Where(x => !downloadedTracks.Any(y => y.TrackId == x.ID)))
             };
             SelectedFilterItem = FilterItems.First();
 
@@ -61,8 +63,8 @@ namespace Blob0ngenClient.ViewModels
             TrackFilterItems = new List<KeyValuePair<string, Func<IEnumerable<Music>>>>()
             {
                 Add("すべて", () => defaultTracks),
-                Add("ダウンロード済み", () => defaultTracks.Where(x => downloadedItems.Contains(x.ID))),
-                Add("未ダウンロード", () => defaultTracks.Where(x => !downloadedItems.Contains(x.ID)))
+                Add("ダウンロード済み", () => defaultTracks.Where(x => downloadedTracks.Any(y => y.TrackId == x.ID))),
+                Add("未ダウンロード", () => defaultTracks.Where(x => !downloadedTracks.Any(y => y.TrackId == x.ID)))
             };
             SelectedTrackFilterItem = SelectedFilterItem;
         }
@@ -171,7 +173,7 @@ namespace Blob0ngenClient.ViewModels
 
 
 
-        private List<int> downloadedItems = Enumerable.Range(0, 40).ToList();
+        private List<DownloadedTrack> downloadedTracks;
         private List<Music> defaultTracks;
         private List<Music> defaultAlbums;
 
