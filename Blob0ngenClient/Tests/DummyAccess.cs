@@ -14,6 +14,7 @@ namespace Blob0ngenClient.Tests
         {
             yield return new Music()
             {
+                ID = 0,
                 Title = "Blooming Lily",
                 Artist = "澤村・スぺンサー・英梨々 (CV.大西沙織)",
                 AlbumArtist = "澤村・スぺンサー・英梨々 (CV.大西沙織)",
@@ -26,6 +27,7 @@ namespace Blob0ngenClient.Tests
             };
             yield return new Music()
             {
+                ID = 1,
                 Title = "LOVE iLLUSiON (Eriri Solo Ver.)",
                 Artist = "澤村・スぺンサー・英梨々 (CV.大西沙織)",
                 AlbumArtist = "澤村・スぺンサー・英梨々 (CV.大西沙織)",
@@ -38,6 +40,7 @@ namespace Blob0ngenClient.Tests
             };
             yield return new Music()
             {
+                ID = 2,
                 Title = "M♭",
                 Artist = "加藤恵 (CV.安野希世乃)",
                 AlbumArtist = "加藤恵 (CV.安野希世乃)",
@@ -50,6 +53,7 @@ namespace Blob0ngenClient.Tests
             };
             yield return new Music()
             {
+                ID = 3,
                 Title = "LOVE iLLUSiON (Megumi Solo Ver.)",
                 Artist = "加藤恵 (CV.安野希世乃)",
                 AlbumArtist = "加藤恵 (CV.安野希世乃)",
@@ -62,6 +66,7 @@ namespace Blob0ngenClient.Tests
             };
             yield return new Music()
             {
+                ID = 4,
                 Title = "饒舌スキャンダラス",
                 Artist = "霞ヶ丘詩羽 (CV.茅野愛衣)",
                 AlbumArtist = "霞ヶ丘詩羽 (CV.茅野愛衣)",
@@ -74,6 +79,7 @@ namespace Blob0ngenClient.Tests
             };
             yield return new Music()
             {
+                ID = 5,
                 Title = "LOVE iLLUSiON (Utaha Solo Ver.)",
                 Artist = "霞ヶ丘詩羽 (CV.茅野愛衣)",
                 AlbumArtist = "霞ヶ丘詩羽 (CV.茅野愛衣)",
@@ -86,6 +92,7 @@ namespace Blob0ngenClient.Tests
             };
             yield return new Music()
             {
+                ID = 6,
                 Title = "DOUBLE RAINBOW DREAMS",
                 Artist = "澤村・スペンサー・英梨々 (CV.大西沙織) & 霞ヶ丘詩羽 (CV.茅野愛衣)",
                 AlbumArtist = "冴えない彼女の育てかた",
