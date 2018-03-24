@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:prism="using:Prism.Unity.Windows"
     xmlns:local="using:Blob0ngenClient"
-    xmlns:converters="using:Blob0ngenClient.Interactions.Converters"
     >
 
     <prism:PrismUnityApplication.Resources>

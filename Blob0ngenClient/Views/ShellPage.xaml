@@ -8,15 +8,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock x:Name="AppTitle"
-                   xmlns:appmodel="using:Windows.ApplicationModel"
-                   Text="{x:Bind appmodel:Package.Current.DisplayName}" 
-                   Style="{StaticResource CaptionTextBlockStyle}" 
-                   IsHitTestVisible="False" 
-                   Canvas.ZIndex="1"/>
-
         <NavigationView x:Name="NavView"
-                        Canvas.ZIndex="0"
                         SelectionChanged="NavViewSelectionChanged">
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="ミュージック" Tag="music" Icon="Audio"/>

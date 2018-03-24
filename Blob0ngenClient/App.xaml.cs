@@ -8,6 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -33,6 +34,9 @@ namespace Blob0ngenClient
 
         protected override Task OnLaunchApplicationAsync(LaunchActivatedEventArgs args)
         {
+            var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            coreTitleBar.ExtendViewIntoTitleBar = false;
+
             NavigationService.Navigate("Shell", null);
             return Task.CompletedTask;
         }
