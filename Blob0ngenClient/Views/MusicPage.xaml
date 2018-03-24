@@ -165,6 +165,7 @@
                         <GridView.ItemTemplate>
                             <DataTemplate x:DataType="m:Music">
                                 <Grid Width="160" Height="225" Margin="5" x:Name="albumPanel" 
+                                      Background="{ThemeResource SystemControlBackgroundAltHighBrush}"
                                             PointerEntered="AlbumGridViewItemPointerEntered"
                                             PointerExited="AlbumGridViewItemPointerExited">
                                     <Grid.RowDefinitions>
