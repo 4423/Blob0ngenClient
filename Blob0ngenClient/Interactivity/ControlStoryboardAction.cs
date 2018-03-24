@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Animation;
 
-namespace Blob0ngenClient.ViewModels
+namespace Blob0ngenClient.Interactivity
 {
     public class ControlStoryboardAction : DependencyObject, IAction
     {

@@ -10,6 +10,7 @@
     xmlns:m="using:Blob0ngenClient.Models"
     xmlns:vm="using:Blob0ngenClient.ViewModels"
     xmlns:c="using:Blob0ngenClient.Controls"
+    xmlns:behavior="using:Blob0ngenClient.Interactivity"
     mc:Ignorable="d"
     x:Name="Page">
 
@@ -269,10 +270,10 @@
 
     <Interactivity:Interaction.Behaviors>
         <Interactions:DataTriggerBehavior Binding="{x:Bind ViewModel.IsOpenDownloadPanel, Mode=OneWay}" Value="True">
-            <vm:ControlStoryboardAction Storyboard="{StaticResource fadeInDownloadProgressPanelStoryboard}"/>
+            <behavior:ControlStoryboardAction Storyboard="{StaticResource fadeInDownloadProgressPanelStoryboard}"/>
         </Interactions:DataTriggerBehavior>
         <Interactions:DataTriggerBehavior Binding="{x:Bind ViewModel.IsOpenDownloadPanel, Mode=OneWay}" Value="False">
-            <vm:ControlStoryboardAction Storyboard="{StaticResource fadeOutDownloadProgressPanelStoryboard}"/>
+            <behavior:ControlStoryboardAction Storyboard="{StaticResource fadeOutDownloadProgressPanelStoryboard}"/>
         </Interactions:DataTriggerBehavior>
     </Interactivity:Interaction.Behaviors>
 </Page>
