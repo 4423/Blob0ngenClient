@@ -34,10 +34,16 @@
             <Setter Property="Padding" Value="5 0 -5 0"/>
         </Style>
         <Storyboard x:Key="fadeInDownloadProgressPanelStoryboard">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="downloadProgressPanel" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
             <FadeInThemeAnimation Storyboard.TargetName="downloadProgressPanel"/>
         </Storyboard>
         <Storyboard x:Key="fadeOutDownloadProgressPanelStoryboard">
             <FadeOutThemeAnimation Storyboard.TargetName="downloadProgressPanel"/>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="downloadProgressPanel" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="Collapsed"/>
+            </ObjectAnimationUsingKeyFrames>
         </Storyboard>
     </Page.Resources>
 
