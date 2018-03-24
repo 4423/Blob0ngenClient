@@ -42,19 +42,5 @@ namespace Blob0ngenClient.Views
 
             this.InitializeComponent();
         }
-
-        private void AlbumGridViewItemPointerEntered(object sender, PointerRoutedEventArgs e)
-        {
-            var grid = sender as Grid;
-            var button = grid.Children.Single(x => x is Button);
-            button.Visibility = Visibility.Visible;
-        }
-
-        private void AlbumGridViewItemPointerExited(object sender, PointerRoutedEventArgs e)
-        {
-            var grid = sender as Grid;
-            var button = grid.Children.Single(x => x is Button);
-            button.Visibility = Visibility.Collapsed;
-        }
     }
 }

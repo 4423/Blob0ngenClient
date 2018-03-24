@@ -165,9 +165,7 @@
                         <GridView.ItemTemplate>
                             <DataTemplate x:DataType="m:Music">
                                 <Grid Width="160" Height="225" Margin="5" x:Name="albumPanel" 
-                                      Background="{ThemeResource SystemControlBackgroundAltHighBrush}"
-                                            PointerEntered="AlbumGridViewItemPointerEntered"
-                                            PointerExited="AlbumGridViewItemPointerExited">
+                                      Background="{ThemeResource SystemControlBackgroundAltHighBrush}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="160"/>
                                         <RowDefinition Height="auto"/>
@@ -182,12 +180,18 @@
                                         </Image.Source>
                                     </Image>
                                     <Button Grid.Row="0" Style="{StaticResource CircularZoomButtonStyle}"
+                                            x:Name="AlbumDownloadButton"
+                                            Opacity="0"
                                             FontFamily="Segoe MDL2 Assets" Content="&#xE118;" FontSize="19"
                                             Command="{Binding ViewModel.AlbumDownloadButtonClickCommand, ElementName=Page}"
                                             CommandParameter="{Binding}"
                                             HorizontalAlignment="Center"
                                             Background="{ThemeResource SystemControlBaseHighAcrylicElementMediumBrush}"
-                                            RequestedTheme="Dark"/>
+                                            RequestedTheme="Dark">
+                                        <Button.RenderTransform>
+                                            <ScaleTransform x:Name="AnimatedScaleTransform" ScaleX="1" ScaleY="1" CenterX="30" CenterY="30"/>
+                                        </Button.RenderTransform>
+                                    </Button>
                                     <TextBlock Grid.Row="1"
                                                Text="{x:Bind Album}"
                                                TextWrapping="Wrap"
@@ -198,6 +202,37 @@
                                                Text="{x:Bind AlbumArtist}"
                                                Foreground="Gray"
                                                FontSize="13"/>
+                                    
+                                    <Interactivity:Interaction.Behaviors>
+                                        <Interactions:EventTriggerBehavior EventName="PointerEntered" SourceObject="{Binding ElementName=albumPanel}">
+                                            <behavior:ControlStoryboardAction>
+                                                <behavior:ControlStoryboardAction.Storyboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetName="AlbumDownloadButton" Storyboard.TargetProperty="Opacity"
+                                                                         From=".85" To="1" Duration="0:0:0.1"/>
+                                                        <DoubleAnimation Storyboard.TargetName="AnimatedScaleTransform" Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
+                                                                         From=".85" To="1" Duration="0:0:0.1"/>
+                                                        <DoubleAnimation Storyboard.TargetName="AnimatedScaleTransform" Storyboard.TargetProperty="(ScaleTransform.ScaleY)"
+                                                                         From=".85" To="1" Duration="0:0:0.1"/>
+                                                    </Storyboard>
+                                                </behavior:ControlStoryboardAction.Storyboard>
+                                            </behavior:ControlStoryboardAction>
+                                        </Interactions:EventTriggerBehavior>
+                                        <Interactions:EventTriggerBehavior EventName="PointerExited" SourceObject="{Binding ElementName=albumPanel}">
+                                            <behavior:ControlStoryboardAction>
+                                                <behavior:ControlStoryboardAction.Storyboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetName="AlbumDownloadButton" Storyboard.TargetProperty="Opacity"
+                                                                         From="1" To="0" Duration="0:0:0.1"/>
+                                                        <DoubleAnimation Storyboard.TargetName="AnimatedScaleTransform" Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
+                                                                         From="1" To=".85" Duration="0:0:0.1"/>
+                                                        <DoubleAnimation Storyboard.TargetName="AnimatedScaleTransform" Storyboard.TargetProperty="(ScaleTransform.ScaleY)"
+                                                                         From="1" To=".85" Duration="0:0:0.1"/>
+                                                    </Storyboard>
+                                                </behavior:ControlStoryboardAction.Storyboard>
+                                            </behavior:ControlStoryboardAction>
+                                        </Interactions:EventTriggerBehavior>
+                                    </Interactivity:Interaction.Behaviors>
                                 </Grid>
                             </DataTemplate>
                         </GridView.ItemTemplate>
