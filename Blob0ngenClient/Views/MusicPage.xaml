@@ -174,28 +174,13 @@
                                             </BitmapImage>
                                         </Image.Source>
                                     </Image>
-                                    <Button Grid.Row="0" FontFamily="Segoe MDL2 Assets" Content="&#xE118;" 
+                                    <Button Grid.Row="0" Style="{StaticResource CircularZoomButtonStyle}"
+                                            FontFamily="Segoe MDL2 Assets" Content="&#xE118;" FontSize="19"
                                             Command="{Binding ViewModel.AlbumDownloadButtonClickCommand, ElementName=Page}"
                                             CommandParameter="{Binding}"
-                                            FontSize="19"
-                                            Width="50"
-                                            HorizontalAlignment="Center" 
-                                            RequestedTheme="Dark"
-                                            Visibility="Collapsed">
-                                        <Button.Template>
-                                            <ControlTemplate TargetType="Button">
-                                                <Grid>
-                                                    <Path Stretch="Uniform" UseLayoutRounding="False"
-                                                          Fill="{ThemeResource SystemControlChromeHighAcrylicElementMediumBrush}">
-                                                        <Path.Data>
-                                                            <EllipseGeometry RadiusX="1" RadiusY="1"/>
-                                                        </Path.Data>
-                                                    </Path>
-                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                </Grid>
-                                            </ControlTemplate>
-                                        </Button.Template>
-                                    </Button>
+                                            HorizontalAlignment="Center"
+                                            Background="{ThemeResource SystemControlBaseHighAcrylicElementMediumBrush}"
+                                            RequestedTheme="Dark"/>
                                     <TextBlock Grid.Row="1"
                                                Text="{x:Bind Album}"
                                                TextWrapping="Wrap"
