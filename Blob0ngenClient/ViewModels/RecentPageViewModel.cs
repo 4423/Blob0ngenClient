@@ -18,10 +18,15 @@ namespace Blob0ngenClient.ViewModels
             var tracks = db.ReadMusic();
             if (tracks.Count() > 0)
             {
-                DownloadedTracks = DownloadedTrackAccess.Get()
-                    .OrderBy(x => x.DownloadedDateTime)
-                    .Select(x => tracks.SingleOrDefault(y => y.ID == x.TrackId))
-                    .ToList();
+                DownloadedTracks = new List<Music>();
+                foreach (var log in DownloadedTrackAccess.Get().OrderBy(x => x.DownloadedDateTime))
+                {
+                    var track = tracks.SingleOrDefault(x => x.ID == log.TrackId);
+                    if (track != null)
+                    {
+                        DownloadedTracks.Add(track);
+                    }
+                }
             }
         }
 
