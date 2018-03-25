@@ -10,6 +10,7 @@
     xmlns:m="using:Blob0ngenClient.Models"
     xmlns:vm="using:Blob0ngenClient.ViewModels"
     xmlns:c="using:Blob0ngenClient.Controls"
+    xmlns:vc="using:Blob0ngenClient.Views.Controls"
     xmlns:behavior="using:Blob0ngenClient.Interactivity"
     mc:Ignorable="d"
     x:Name="Page">
@@ -21,17 +22,6 @@
             <Setter Property="Width" Value="45"/>
             <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
             <Setter Property="FontSize" Value="19"/>
-        </Style>
-        <Style x:Key="FilteringTextBlockStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="13"/>
-        </Style>
-        <Style TargetType="ComboBox">
-            <Setter Property="SelectedIndex" Value="0"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="FontSize" Value="13"/>
-            <Setter Property="Foreground" Value="{ThemeResource SystemAccentColor1}"/>
-            <Setter Property="Margin" Value="1 -7"/>
-            <Setter Property="Padding" Value="5 0 -5 0"/>
         </Style>
         <Storyboard x:Key="fadeInDownloadProgressPanelStoryboard">
             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="downloadProgressPanel" Storyboard.TargetProperty="Visibility">
@@ -59,28 +49,11 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="160"/>
-                            <ColumnDefinition Width="200"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0" Orientation="Horizontal">
-                            <TextBlock Text="並べ替え:"
-                                       Style="{StaticResource FilteringTextBlockStyle}"/>
-                            <ComboBox ItemsSource="{x:Bind ViewModel.TrackOrderItems}"
-                                      SelectedItem="{x:Bind ViewModel.SelectedTrackOrderItem, Mode=TwoWay}"
-                                      DisplayMemberPath="Key"/>
-                        </StackPanel>
-                        <StackPanel Grid.Column="1" Orientation="Horizontal">
-                            <TextBlock Text="絞り込み:"
-                                       Margin="20 0 0 0" 
-                                       Style="{StaticResource FilteringTextBlockStyle}"/>
-                            <ComboBox ItemsSource="{x:Bind ViewModel.TrackFilterItems}"
-                                      SelectedItem="{x:Bind ViewModel.SelectedTrackFilterItem, Mode=TwoWay}"
-                                      DisplayMemberPath="Key"/>
-                        </StackPanel>
-                    </Grid>
-
+                    <vc:ConditionsComboBox Grid.Row="0"
+                                           OrderComboBoxItems="{x:Bind ViewModel.OrderComboBoxItems, Mode=OneWay}"
+                                           FilterComboBoxItems="{x:Bind ViewModel.FilterComboBoxItems, Mode=OneWay}"
+                                           SelectedOrderComboBoxItem="{x:Bind ViewModel.SelectedOrderComboBoxItem, Mode=TwoWay}"
+                                           SelectedFilterComboBoxItem="{x:Bind ViewModel.SelectedFilterComboBoxItem, Mode=TwoWay}"/>
                     <Grid Grid.Row="1">
                         <c:AlternatingRowListView x:Name="trackListView"
                                                   ItemsSource="{x:Bind ViewModel.Tracks, Mode=OneWay}"
@@ -137,28 +110,11 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="160"/>
-                            <ColumnDefinition Width="200"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0" Orientation="Horizontal">
-                            <TextBlock Text="並べ替え:"
-                                       Style="{StaticResource FilteringTextBlockStyle}"/>
-                            <ComboBox ItemsSource="{x:Bind ViewModel.OrderItems}"
-                                      SelectedItem="{x:Bind ViewModel.SelectedOrderItem, Mode=TwoWay}"
-                                      DisplayMemberPath="Key"/>
-                        </StackPanel>
-                        <StackPanel Grid.Column="1" Orientation="Horizontal">
-                            <TextBlock Text="絞り込み:"
-                                       Margin="20 0 0 0" 
-                                       Style="{StaticResource FilteringTextBlockStyle}"/>
-                            <ComboBox ItemsSource="{x:Bind ViewModel.FilterItems}"
-                                      SelectedItem="{x:Bind ViewModel.SelectedFilterItem, Mode=TwoWay}"
-                                      DisplayMemberPath="Key"/>
-                        </StackPanel>
-                    </Grid>
-
+                    <vc:ConditionsComboBox Grid.Row="0"
+                                           OrderComboBoxItems="{x:Bind ViewModel.OrderComboBoxItems, Mode=OneWay}"
+                                           FilterComboBoxItems="{x:Bind ViewModel.FilterComboBoxItems, Mode=OneWay}"
+                                           SelectedOrderComboBoxItem="{x:Bind ViewModel.SelectedOrderComboBoxItem, Mode=TwoWay}"
+                                           SelectedFilterComboBoxItem="{x:Bind ViewModel.SelectedFilterComboBoxItem, Mode=TwoWay}"/>
                     <GridView Grid.Row="1"
                               ItemsSource="{x:Bind ViewModel.Albums, Mode=OneWay}"
                               ItemContainerStyle="{ThemeResource GridViewItemRevealBackgroundShowsAboveContentStyle}">

@@ -96,6 +96,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\AlternatingRowListView.cs" />
+    <Compile Include="Views\Controls\ConditionsComboBox.xaml.cs">
+      <DependentUpon>ConditionsComboBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\AzureBlobAccess.cs" />
     <Compile Include="Models\DownloadedTrackAccess.cs" />
     <Compile Include="Models\FileDownloadHelper.cs" />
@@ -146,6 +149,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\Controls\ConditionsComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\Controls.Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

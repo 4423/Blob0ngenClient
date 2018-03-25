@@ -26,4 +26,10 @@ namespace Blob0ngenClient.Models
         public string AlbumArtist { get; set; }
         public string CoverArtPath { get; set; }
     }
+
+    public static class MusicExt
+    {
+        public static IEnumerable<Music> ToAlbums(this IEnumerable<Music> musics)
+            => musics.GroupBy(x => x.Album).Select(x => x.First());
+    }
 }
