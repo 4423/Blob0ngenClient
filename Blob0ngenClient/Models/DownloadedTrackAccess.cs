@@ -50,7 +50,7 @@ namespace Blob0ngenClient.Models
             this.TrackId = trackId;
         }
 
-        public DownloadedTrack(int trackId, DateTime downloadedDateTime) : base()
+        public DownloadedTrack(int trackId, DateTime downloadedDateTime) : this(trackId)
         {
             this.DownloadedDateTime = downloadedDateTime;
         }
