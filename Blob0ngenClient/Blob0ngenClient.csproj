@@ -96,6 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\AlternatingRowListView.cs" />
+    <Compile Include="ViewModels\ShellPageViewModel.cs" />
     <Compile Include="Views\Controls\ConditionsComboBox.xaml.cs">
       <DependentUpon>ConditionsComboBox.xaml</DependentUpon>
     </Compile>
@@ -130,6 +131,10 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="Blob0ngenClient_TemporaryKey.pfx" />
+    <Page Include="Styles\Controls.AppBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <PRIResource Include="Properties\Resources.resw">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </PRIResource>

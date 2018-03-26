@@ -15,28 +15,6 @@
     mc:Ignorable="d"
     x:Name="Page">
 
-    <Page.Resources>
-        <Style x:Key="CommandBarButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Height" Value="64"/>
-            <Setter Property="Width" Value="45"/>
-            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
-            <Setter Property="FontSize" Value="19"/>
-        </Style>
-        <Storyboard x:Key="fadeInDownloadProgressPanelStoryboard">
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="downloadProgressPanel" Storyboard.TargetProperty="Visibility">
-                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
-            </ObjectAnimationUsingKeyFrames>
-            <FadeInThemeAnimation Storyboard.TargetName="downloadProgressPanel"/>
-        </Storyboard>
-        <Storyboard x:Key="fadeOutDownloadProgressPanelStoryboard">
-            <FadeOutThemeAnimation Storyboard.TargetName="downloadProgressPanel"/>
-            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="downloadProgressPanel" Storyboard.TargetProperty="Visibility">
-                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="Collapsed"/>
-            </ObjectAnimationUsingKeyFrames>
-        </Storyboard>
-    </Page.Resources>
-
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Pivot>
             <PivotItem>
@@ -127,7 +105,7 @@
                                         <RowDefinition Height="auto"/>
                                         <RowDefinition Height="auto"/>
                                     </Grid.RowDefinitions>
-                                    
+
                                     <Image Grid.Row="0" Stretch="Uniform">
                                         <Image.Source>
                                             <BitmapImage DecodePixelWidth="300"
@@ -158,7 +136,7 @@
                                                Text="{x:Bind AlbumArtist}"
                                                Foreground="Gray"
                                                FontSize="13"/>
-                                    
+
                                     <Interactivity:Interaction.Behaviors>
                                         <Interactions:EventTriggerBehavior EventName="PointerEntered" SourceObject="{Binding ElementName=albumPanel}">
                                             <behavior:ControlStoryboardAction>
@@ -196,67 +174,5 @@
                 </Grid>
             </PivotItem>
         </Pivot>
-
-        <Grid x:Name="downloadProgressPanel"
-              VerticalAlignment="Bottom"
-              Height="64"
-              Margin="-12 0"
-              RequestedTheme="Dark">
-            <Grid Background="{ThemeResource SystemControlAccentAcrylicElementAccentMediumHighBrush}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <Image Grid.Column="0" Margin="7">
-                    <Image.Source>
-                        <BitmapImage UriSource="{Binding ViewModel.DownloadingMusic.CoverArtPath, ElementName=Page,
-                                                TargetNullValue={StaticResource defaultCoverArtUrl}}"
-                                     DecodePixelWidth="120"/>
-                    </Image.Source>
-                </Image>
-                <StackPanel Grid.Column="1" Margin="1 0 0 5" VerticalAlignment="Center">
-                    <TextBlock Text="{x:Bind ViewModel.DownloadingMusic.Title, Mode=OneWay}" FontSize="16"/>
-                    <TextBlock Text="{x:Bind ViewModel.DownloadingMusic.Artist, Mode=OneWay}" FontSize="13"/>
-                </StackPanel>
-                <Grid Grid.Column="2" VerticalAlignment="Center" Margin="7 0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
-                    <ProgressBar Grid.Column="1"
-                                 Value="{x:Bind ViewModel.DownloadProgressValue, Mode=OneWay}" 
-                                 Maximum="{x:Bind ViewModel.DownloadProgressMaximum, Mode=OneWay}"
-                                 Margin="10 0"
-                                 Foreground="White"/>
-                    <TextBlock Grid.Column="2">
-                        <Run Text="{x:Bind ViewModel.DownloadProgressValue, Mode=OneWay}"/>
-                        <Run Text="%"/>
-                    </TextBlock>
-                </Grid>
-                <StackPanel Grid.Column="3" Orientation="Horizontal">
-                    <Button Content="&#xE711;" Style="{StaticResource CommandBarButtonStyle}"/>
-                    <Button Content="&#xE10C;" Style="{StaticResource CommandBarButtonStyle}">
-                        <Button.Flyout>
-                            <MenuFlyout>
-                                <MenuFlyoutItem Text="nigiyakashi1"/>
-                                <MenuFlyoutItem Text="nigiyakashi2"/>
-                            </MenuFlyout>
-                        </Button.Flyout>
-                    </Button>
-                </StackPanel>
-            </Grid>
-        </Grid>
     </Grid>
-
-    <Interactivity:Interaction.Behaviors>
-        <Interactions:DataTriggerBehavior Binding="{x:Bind ViewModel.IsOpenDownloadPanel, Mode=OneWay}" Value="True">
-            <behavior:ControlStoryboardAction Storyboard="{StaticResource fadeInDownloadProgressPanelStoryboard}"/>
-        </Interactions:DataTriggerBehavior>
-        <Interactions:DataTriggerBehavior Binding="{x:Bind ViewModel.IsOpenDownloadPanel, Mode=OneWay}" Value="False">
-            <behavior:ControlStoryboardAction Storyboard="{StaticResource fadeOutDownloadProgressPanelStoryboard}"/>
-        </Interactions:DataTriggerBehavior>
-    </Interactivity:Interaction.Behaviors>
 </Page>

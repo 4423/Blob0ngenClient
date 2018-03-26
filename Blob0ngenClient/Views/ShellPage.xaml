@@ -5,8 +5,11 @@
     xmlns:local="using:Blob0ngenClient"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity" 
+    xmlns:interactions="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:behavior="using:Blob0ngenClient.Interactivity"
     mc:Ignorable="d">
-
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <NavigationView x:Name="NavView"
                         SelectionChanged="NavViewSelectionChanged">
@@ -49,4 +52,93 @@
             </Frame>
         </NavigationView>
     </Grid>
+
+    <Page.BottomAppBar>
+        <AppBar ClosedDisplayMode="Compact" Height="64" RequestedTheme="Dark"
+                Background="{ThemeResource SystemControlAccentAcrylicElementAccentMediumHighBrush}">
+            <Grid x:Name="DownloadProgressPanel">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <Image Grid.Column="0" Margin="7">
+                    <Image.Source>
+                        <BitmapImage UriSource="{Binding ViewModel.ImageUrl, TargetNullValue={StaticResource DefaultCoverArtUrl}}" 
+                                     DecodePixelWidth="120"/>
+                    </Image.Source>
+                </Image>
+                
+                <StackPanel Grid.Column="1" Margin="1 0 0 5" VerticalAlignment="Center">
+                    <TextBlock Text="{x:Bind ViewModel.Title, Mode=OneWay}" FontSize="16"/>
+                    <TextBlock Text="{x:Bind ViewModel.Artist, Mode=OneWay}" FontSize="13"/>
+                </StackPanel>
+                
+                <Grid Grid.Column="2" VerticalAlignment="Center" Margin="7 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <ProgressBar Grid.Column="1"
+                                 Value="{x:Bind ViewModel.DownloadProgressValue, Mode=OneWay}" 
+                                 Maximum="{x:Bind ViewModel.DownloadProgressMaximum}"
+                                 Margin="10 0"
+                                 Foreground="White"/>
+                    <TextBlock Grid.Column="2">
+                        <Run Text="{x:Bind ViewModel.DownloadProgressValue, Mode=OneWay}"/>
+                        <Run Text="%"/>
+                    </TextBlock>
+                </Grid>
+                
+                <StackPanel Grid.Column="3" Orientation="Horizontal">
+                    <StackPanel.Resources>
+                        <Style x:Key="AppBarButtonStyle" TargetType="Button">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Height" Value="64"/>
+                            <Setter Property="Width" Value="45"/>
+                            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+                            <Setter Property="FontSize" Value="19"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Button Content="&#xE711;" Style="{StaticResource AppBarButtonStyle}"
+                            Command="{x:Bind ViewModel.DownloadAbortButtonClickCommand}"/>
+                    <Button Content="&#xE10C;" Style="{StaticResource AppBarButtonStyle}">
+                        <Button.Flyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Text="nigiyakashi1"/>
+                                <MenuFlyoutItem Text="nigiyakashi2"/>
+                            </MenuFlyout>
+                        </Button.Flyout>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </AppBar>
+    </Page.BottomAppBar>
+
+    <Page.Resources>
+        <Storyboard x:Key="FadeInDownloadProgressPanelStoryboard">
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DownloadProgressPanel" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
+            </ObjectAnimationUsingKeyFrames>
+            <FadeInThemeAnimation Storyboard.TargetName="DownloadProgressPanel"/>
+        </Storyboard>
+        <Storyboard x:Key="FadeOutDownloadProgressPanelStoryboard">
+            <FadeOutThemeAnimation Storyboard.TargetName="DownloadProgressPanel"/>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="DownloadProgressPanel" Storyboard.TargetProperty="Visibility">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.5" Value="Collapsed"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+    </Page.Resources>
+    
+    <interactivity:Interaction.Behaviors>
+        <interactions:DataTriggerBehavior Binding="{x:Bind ViewModel.IsDownloading, Mode=OneWay}" Value="True">
+            <behavior:ControlStoryboardAction Storyboard="{StaticResource FadeInDownloadProgressPanelStoryboard}"/>
+        </interactions:DataTriggerBehavior>
+        <interactions:DataTriggerBehavior Binding="{x:Bind ViewModel.IsDownloading, Mode=OneWay}" Value="False">
+            <behavior:ControlStoryboardAction Storyboard="{StaticResource FadeOutDownloadProgressPanelStoryboard}"/>
+        </interactions:DataTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
 </Page>

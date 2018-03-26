@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Blob0ngenClient.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -17,8 +19,13 @@ namespace Blob0ngenClient.Views
 {
     public sealed partial class ShellPage : Page
     {
+        public ShellPageViewModel ViewModel { get; } = new ShellPageViewModel();
+
         public ShellPage()
         {
+            string url = ResourceLoader.GetForCurrentView().GetString("DefaultCoverArtUrl");
+            Resources.Add("DefaultCoverArtUrl", url);
+
             this.InitializeComponent();
 
             ContentFrame.Navigate(typeof(MusicPage));
