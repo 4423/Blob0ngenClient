@@ -10,24 +10,14 @@ namespace Blob0ngenClient.ViewModels
 {
     public class RecentPageViewModel : BindableBase
     {
-        private IDatabaseAccess db;
-
         public RecentPageViewModel(IDatabaseAccess db)
         {
-            this.db = db;
-            var tracks = db.ReadMusic();
-            if (tracks.Count() > 0)
+            var log = DownloadedTrackAccess.Get();
+            DownloadedTracks = log.Join(db.ReadMusic(), l => l.TrackId, m => m.ID, (l, m) => new
             {
-                DownloadedTracks = new List<Music>();
-                foreach (var log in DownloadedTrackAccess.Get().OrderBy(x => x.DownloadedDateTime))
-                {
-                    var track = tracks.SingleOrDefault(x => x.ID == log.TrackId);
-                    if (track != null)
-                    {
-                        DownloadedTracks.Add(track);
-                    }
-                }
-            }
+                DateTime = l.DownloadedDateTime,
+                Track = m
+            }).OrderByDescending(x => x.DateTime).Select(x => x.Track).ToList();
         }
 
         private List<Music> downloadedTracks;
