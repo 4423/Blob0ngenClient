@@ -96,13 +96,13 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\AlternatingRowListView.cs" />
+    <Compile Include="Models\MusicDownloadManager.cs" />
     <Compile Include="ViewModels\ShellPageViewModel.cs" />
     <Compile Include="Views\Controls\ConditionsComboBox.xaml.cs">
       <DependentUpon>ConditionsComboBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\AzureBlobAccess.cs" />
     <Compile Include="Models\DownloadedTrackAccess.cs" />
-    <Compile Include="Models\FileDownloadHelper.cs" />
     <Compile Include="Models\FolderDialogService.cs" />
     <Compile Include="Models\IDatabaseAccess.cs" />
     <Compile Include="Models\IFolderDialogService.cs" />

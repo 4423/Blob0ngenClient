@@ -155,23 +155,7 @@ namespace Blob0ngenClient.ViewModels
         }
         #endregion
 
-
-        private bool isOpenDownloadPanel;
-        public bool IsOpenDownloadPanel
-        {
-            get { return isOpenDownloadPanel; }
-            set { this.SetProperty(ref isOpenDownloadPanel, value); }
-        }
         
-
-        private Music downloadingMusic;
-        public Music DownloadingMusic
-        {
-            get { return downloadingMusic; }
-            set { this.SetProperty(ref downloadingMusic, value); }
-        }
-
-
         private ICommand albumDownloadButtonClickCommand;
         public ICommand AlbumDownloadButtonClickCommand
             => albumDownloadButtonClickCommand ?? 
@@ -179,30 +163,12 @@ namespace Blob0ngenClient.ViewModels
 
         private async void OnAlbumDownloadButtonClick(Music music)
         {
-            IsOpenDownloadPanel = true;
-            DownloadingMusic = new Music()
+            var folder = await folderDialogService.PickSingleFolderAsync();
+            if (folder != null)
             {
-                Title = music.Album,
-                Artist = music.AlbumArtist,
-                CoverArtPath = music.CoverArtPath
-            };
-
-            var album = Tracks.Where(x => x.Album == music.Album);
-            var albumUrls = album.Select(x => Uri.UnescapeDataString(x.BlobPath)).ToList();
-
-            bool isCanceled = await FileDownloadHelper.DownloadToSelectedFolderAsync(
-                folderDialogService, albumUrls, BlobDownloadProgressChanged);
-
-            if (isCanceled)
-            {
-                ResetDownloadProgressPanel();
-            }
-            else
-            {
-                var tracks = album.Select(x => new DownloadedTrack(x.ID, DateTime.Now));
-                foreach (var track in tracks)
+                foreach (var m in Tracks.Where(x => x.Album == music.Album))
                 {
-                    DownloadedTrackAccess.Insert(track);
+                    App.DownloadManager.ReserveDownloadAsync(m, folder);
                 }
             }
         }
@@ -212,49 +178,13 @@ namespace Blob0ngenClient.ViewModels
         public ICommand ButtonClickCommand
             => buttonClickCommand ?? (buttonClickCommand = new DelegateCommand<Music>(OnButtonClick));
 
-        private async void OnButtonClick(Music item)
+        private async void OnButtonClick(Music music)
         {
-            IsOpenDownloadPanel = true;
-            DownloadingMusic = item;
-
-            var srcUri = Uri.UnescapeDataString(item.BlobPath);
-            bool isCanceled = await FileDownloadHelper.DownloadToSelectedFolderAsync(
-                folderDialogService, srcUri, BlobDownloadProgressChanged);
-
-            if (isCanceled)
+            var folder = await folderDialogService.PickSingleFolderAsync();
+            if (folder != null)
             {
-                ResetDownloadProgressPanel();
+                App.DownloadManager.ReserveDownloadAsync(music, folder);
             }
-            else
-            {
-                DownloadedTrackAccess.Insert(new DownloadedTrack(item.ID, DateTime.Now));
-            }
-        }
-
-        private async void BlobDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs args)
-        {
-            DownloadProgressValue = (int)((double)args.DownloadedSize / args.FileSize * DownloadProgressMaximum);
-            if (args.IsCompleted)
-            {
-                await Task.Delay(1000);
-                ResetDownloadProgressPanel();
-            }
-        }
-
-        private void ResetDownloadProgressPanel()
-        {
-            IsOpenDownloadPanel = false;
-            DownloadingMusic = null;
-            DownloadProgressValue = 0;
-        }
-
-        public int DownloadProgressMaximum => 100;
-
-        private int downloadProgressValue = 0;
-        public int DownloadProgressValue
-        {
-            get { return downloadProgressValue; }
-            set { this.SetProperty(ref downloadProgressValue, value); }
         }
         
 

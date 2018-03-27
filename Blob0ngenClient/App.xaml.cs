@@ -1,4 +1,5 @@
-﻿using Blob0ngenClient.Views;
+﻿using Blob0ngenClient.Models;
+using Blob0ngenClient.Views;
 using Prism.Unity.Windows;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,9 @@ namespace Blob0ngenClient
     {
         public static string SqlDatabaseConnectionString
             => ResourceLoader.GetForCurrentView().GetString("SqlDatabaseConnectionString");
+
+        public static MusicDownloadManager DownloadManager { get; } = new MusicDownloadManager();
+
 
         public App()
         {

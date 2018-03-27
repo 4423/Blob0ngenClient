@@ -66,14 +66,14 @@
                 
                 <Image Grid.Column="0" Margin="7">
                     <Image.Source>
-                        <BitmapImage UriSource="{Binding ViewModel.ImageUrl, TargetNullValue={StaticResource DefaultCoverArtUrl}}" 
+                        <BitmapImage UriSource="{x:Bind ViewModel.DownloadingMusic.CoverArtPath, Mode=OneWay}" 
                                      DecodePixelWidth="120"/>
                     </Image.Source>
                 </Image>
                 
                 <StackPanel Grid.Column="1" Margin="1 0 0 5" VerticalAlignment="Center">
-                    <TextBlock Text="{x:Bind ViewModel.Title, Mode=OneWay}" FontSize="16"/>
-                    <TextBlock Text="{x:Bind ViewModel.Artist, Mode=OneWay}" FontSize="13"/>
+                    <TextBlock Text="{x:Bind ViewModel.DownloadingMusic.Title, Mode=OneWay}" FontSize="16"/>
+                    <TextBlock Text="{x:Bind ViewModel.DownloadingMusic.Artist, Mode=OneWay}" FontSize="13"/>
                 </StackPanel>
                 
                 <Grid Grid.Column="2" VerticalAlignment="Center" Margin="7 0">
