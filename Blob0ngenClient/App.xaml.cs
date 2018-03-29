@@ -34,7 +34,7 @@ namespace Blob0ngenClient
 
         public App()
         {
-#if !DEBUG
+#if DEBUG
             DatabaseAccess = new Tests.DummyAccess();
 #else
             if (!String.IsNullOrEmpty(MyApplicationData.SqlConnectionString))
