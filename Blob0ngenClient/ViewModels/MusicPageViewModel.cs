@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Xaml.Controls;
+using Windows.Storage;
+using Blob0ngenClient.Helpers;
 
 namespace Blob0ngenClient.ViewModels
 {
@@ -166,11 +168,22 @@ namespace Blob0ngenClient.ViewModels
             var folder = await folderDialogService.PickSingleFolderAsync();
             if (folder != null)
             {
+                folder = await CreateFolderIfSettingsOnAsync(folder, music.Album);
                 foreach (var m in Tracks.Where(x => x.Album == music.Album))
                 {
                     App.DownloadManager.ReserveDownloadAsync(m, folder);
                 }
             }
+        }
+
+        private async Task<StorageFolder> CreateFolderIfSettingsOnAsync(StorageFolder folder, string desiredName)
+        {
+            if (MyApplicationData.IsCreateFolderOn)
+            {
+                var name = desiredName.ToValidFileName();
+                return await folder.CreateFolderAsync(name, CreationCollisionOption.ReplaceExisting);
+            }
+            return folder;
         }
 
 

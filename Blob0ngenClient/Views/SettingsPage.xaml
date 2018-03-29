@@ -38,5 +38,15 @@
                 </StackPanel>
             </StackPanel>
         </StackPanel>
+        
+        <StackPanel Grid.Row="1">
+            <StackPanel Margin="{StaticResource SettingsSubheaderMargin}">
+                <TextBlock Text="ダウンロード設定" Style="{StaticResource SubtitleTextBlockStyle}" />
+                <StackPanel Margin="{StaticResource EightTopMargin}">
+                    <TextBlock Text="アルバムをダウンロードするときにフォルダを作成" Style="{StaticResource BodyTextStyle}" />
+                    <ToggleSwitch IsOn="{x:Bind ViewModel.IsCreateFolderOn, Mode=TwoWay}"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Page>
