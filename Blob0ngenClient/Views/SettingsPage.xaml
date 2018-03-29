@@ -10,6 +10,7 @@
     <Page.Resources>
         <Thickness x:Key="SettingsSubheaderMargin">12, 0, 0, 25</Thickness>
         <Thickness x:Key="EightTopMargin">0, 8, 0, 0</Thickness>
+        <Thickness x:Key="TwelveLeftMargin">0 0 12 0</Thickness>
         <Style x:Key="BodyTextStyle" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Normal"/>
             <Setter Property="FontSize" Value="16"/>
@@ -45,6 +46,18 @@
                 <StackPanel Margin="{StaticResource EightTopMargin}">
                     <TextBlock Text="アルバムをダウンロードするときにフォルダを作成" Style="{StaticResource BodyTextStyle}" />
                     <ToggleSwitch IsOn="{x:Bind ViewModel.IsCreateFolderOn, Mode=TwoWay}"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2">
+            <StackPanel Margin="{StaticResource SettingsSubheaderMargin}">
+                <TextBlock Text="Azure Blob Storage" Style="{StaticResource SubtitleTextBlockStyle}" />
+                <StackPanel Margin="{StaticResource EightTopMargin}">
+                    <TextBlock Text="SAS URI" Style="{StaticResource BodyTextStyle}" />
+                    <TextBox Text="{x:Bind ViewModel.SasUri, Mode=TwoWay}" 
+                             PlaceholderText="{x:Bind ViewModel.SasUriPlaceholder}"
+                             Margin="{StaticResource TwelveLeftMargin}"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

@@ -19,5 +19,11 @@ namespace Blob0ngenClient.Models
             get => SettingsValues.ContainsKey("IsCreateFolderOn") ? (bool)SettingsValues["IsCreateFolderOn"] : false;
             set => SettingsValues["IsCreateFolderOn"] = value;
         }
+
+        public static string SasUri
+        {
+            get => SettingsValues["SasUri"] as string;
+            set => SettingsValues["SasUri"] = value;
+        }
     }
 }
