@@ -18,62 +18,64 @@
             <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
     </Page.Resources>
-    
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        
-        <StackPanel Grid.Row="0">
-            <StackPanel Margin="{StaticResource SettingsSubheaderMargin}">
-                <TextBlock Text="ダウンロード履歴" Style="{StaticResource SubtitleTextBlockStyle}" />
-                <StackPanel Margin="{StaticResource EightTopMargin}">
-                    <TextBlock Text="すべてのダウンロード履歴を削除" Style="{StaticResource BodyTextStyle}" />
-                    <Button Content="削除" Command="{x:Bind ViewModel.DeleteLogButtonClickCommand}"/>
-                </StackPanel>
-                <StackPanel Margin="{StaticResource EightTopMargin}">
-                    <TextBlock Text="すべての楽曲をダウンロード済みに登録" Style="{StaticResource BodyTextStyle}" />
-                    <Button Content="登録" Command="{x:Bind ViewModel.RegisterLogButtonClickCommand}"/>
-                </StackPanel>
-            </StackPanel>
-        </StackPanel>
-        
-        <StackPanel Grid.Row="1">
-            <StackPanel Margin="{StaticResource SettingsSubheaderMargin}">
-                <TextBlock Text="ダウンロード設定" Style="{StaticResource SubtitleTextBlockStyle}" />
-                <StackPanel Margin="{StaticResource EightTopMargin}">
-                    <TextBlock Text="アルバムをダウンロードするときにフォルダを作成" Style="{StaticResource BodyTextStyle}" />
-                    <ToggleSwitch IsOn="{x:Bind ViewModel.IsCreateFolderOn, Mode=TwoWay}"/>
-                </StackPanel>
-            </StackPanel>
-        </StackPanel>
 
-        <StackPanel Grid.Row="2">
-            <StackPanel Margin="{StaticResource SettingsSubheaderMargin}">
-                <TextBlock Text="Azure Blob Storage" Style="{StaticResource SubtitleTextBlockStyle}" />
-                <StackPanel Margin="{StaticResource EightTopMargin}">
-                    <TextBlock Text="SAS URI" Style="{StaticResource BodyTextStyle}" />
-                    <TextBox Text="{x:Bind ViewModel.SasUri, Mode=TwoWay}" 
-                             PlaceholderText="{x:Bind ViewModel.SasUriPlaceholder}"
-                             Margin="{StaticResource TwelveLeftMargin}"/>
-                </StackPanel>
-            </StackPanel>
-        </StackPanel>
+    <ScrollViewer>
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="3">
-            <StackPanel Margin="{StaticResource SettingsSubheaderMargin}">
-                <TextBlock Text="楽曲データベース" Style="{StaticResource SubtitleTextBlockStyle}" />
-                <StackPanel Margin="{StaticResource EightTopMargin}">
-                    <TextBlock Text="楽曲情報を格納しているSQLデータベースの接続文字列（次にアプリを起動したときに変更が適用されています。）" 
-                               Style="{StaticResource BodyTextStyle}" />
-                    <TextBox Text="{x:Bind ViewModel.SqlConnectionString, Mode=TwoWay}" 
-                             PlaceholderText="{x:Bind ViewModel.SqlConnectionStringPlaceholder}"
-                             Margin="{StaticResource TwelveLeftMargin}"/>
+            <StackPanel Grid.Row="0">
+                <StackPanel Margin="{StaticResource SettingsSubheaderMargin}">
+                    <TextBlock Text="ダウンロード履歴" Style="{StaticResource SubtitleTextBlockStyle}" />
+                    <StackPanel Margin="{StaticResource EightTopMargin}">
+                        <TextBlock Text="すべてのダウンロード履歴を削除" Style="{StaticResource BodyTextStyle}" />
+                        <Button Content="削除" Command="{x:Bind ViewModel.DeleteLogButtonClickCommand}"/>
+                    </StackPanel>
+                    <StackPanel Margin="{StaticResource EightTopMargin}">
+                        <TextBlock Text="すべての楽曲をダウンロード済みに登録" Style="{StaticResource BodyTextStyle}" />
+                        <Button Content="登録" Command="{x:Bind ViewModel.RegisterLogButtonClickCommand}"/>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
-        </StackPanel>
-    </Grid>
+
+            <StackPanel Grid.Row="1">
+                <StackPanel Margin="{StaticResource SettingsSubheaderMargin}">
+                    <TextBlock Text="ダウンロード設定" Style="{StaticResource SubtitleTextBlockStyle}" />
+                    <StackPanel Margin="{StaticResource EightTopMargin}">
+                        <TextBlock Text="アルバムをダウンロードするときにフォルダを作成" Style="{StaticResource BodyTextStyle}" />
+                        <ToggleSwitch IsOn="{x:Bind ViewModel.IsCreateFolderOn, Mode=TwoWay}"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2">
+                <StackPanel Margin="{StaticResource SettingsSubheaderMargin}">
+                    <TextBlock Text="Azure Blob Storage" Style="{StaticResource SubtitleTextBlockStyle}" />
+                    <StackPanel Margin="{StaticResource EightTopMargin}">
+                        <TextBlock Text="SAS URI" Style="{StaticResource BodyTextStyle}" />
+                        <TextBox Text="{x:Bind ViewModel.SasUri, Mode=TwoWay}" 
+                                 PlaceholderText="{x:Bind ViewModel.SasUriPlaceholder}"
+                                 Margin="{StaticResource TwelveLeftMargin}"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Row="3">
+                <StackPanel Margin="{StaticResource SettingsSubheaderMargin}">
+                    <TextBlock Text="楽曲データベース" Style="{StaticResource SubtitleTextBlockStyle}" />
+                    <StackPanel Margin="{StaticResource EightTopMargin}">
+                        <TextBlock Text="楽曲情報を格納しているSQLデータベースの接続文字列（次にアプリを起動したときに変更が適用されています。）" 
+                                   Style="{StaticResource BodyTextStyle}" />
+                        <TextBox Text="{x:Bind ViewModel.SqlConnectionString, Mode=TwoWay}" 
+                                 PlaceholderText="{x:Bind ViewModel.SqlConnectionStringPlaceholder}"
+                                 Margin="{StaticResource TwelveLeftMargin}"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Page>
