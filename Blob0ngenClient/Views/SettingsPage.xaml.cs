@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Blob0ngenClient.Models;
+using Blob0ngenClient.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +24,13 @@ namespace Blob0ngenClient.Views
     /// </summary>
     public sealed partial class SettingsPage : Page
     {
+        public SettingsPageViewModel ViewModel { get; }
+#if DEBUG
+            = new SettingsPageViewModel(new Tests.DummyAccess(), new ContentDialogService());
+#else
+            = new SettingsPageViewModel(new SqlAccess(App.SqlDatabaseConnectionString), new ContentDialogService());
+#endif
+
         public SettingsPage()
         {
             this.InitializeComponent();
