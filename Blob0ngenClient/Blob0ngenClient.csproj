@@ -96,7 +96,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\AlternatingRowListView.cs" />
+    <Compile Include="Models\ContentDialogService.cs" />
+    <Compile Include="Models\IDialogService.cs" />
     <Compile Include="Models\MusicDownloadManager.cs" />
+    <Compile Include="ViewModels\SettingsPageViewModel.cs" />
     <Compile Include="ViewModels\ShellPageViewModel.cs" />
     <Compile Include="Views\Controls\ConditionsComboBox.xaml.cs">
       <DependentUpon>ConditionsComboBox.xaml</DependentUpon>

@@ -35,6 +35,15 @@ namespace Blob0ngenClient.Models
                 return tracks.FindAll().ToList();
             }
         }
+
+        public static void DeleteAll()
+        {
+            using (var db = new LiteDatabase(ConnectionString))
+            {
+                var tracks = db.GetCollection<DownloadedTrack>(TableName);
+                tracks.Delete(x => true);
+            }
+        }
     }
 
     public class DownloadedTrack
