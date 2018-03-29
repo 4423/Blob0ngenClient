@@ -25,5 +25,11 @@ namespace Blob0ngenClient.Models
             get => SettingsValues["SasUri"] as string;
             set => SettingsValues["SasUri"] = value;
         }
+
+        public static string SqlConnectionString
+        {
+            get => SettingsValues["SqlConnectionString"] as string;
+            set => SettingsValues["SqlConnectionString"] = value;
+        }
     }
 }

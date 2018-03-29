@@ -25,14 +25,30 @@ namespace Blob0ngenClient
 {
     sealed partial class App : PrismUnityApplication
     {
-        public static string SqlDatabaseConnectionString
-            => ResourceLoader.GetForCurrentView().GetString("SqlDatabaseConnectionString");
+        public static IDatabaseAccess DatabaseAccess { get; private set; }
+        public static IFolderDialogService FolderDialogService { get; private set; }
+        public static IDialogService DialogService { get; private set; }
 
         public static MusicDownloadManager DownloadManager { get; } = new MusicDownloadManager();
 
 
         public App()
         {
+#if !DEBUG
+            DatabaseAccess = new Tests.DummyAccess();
+#else
+            if (!String.IsNullOrEmpty(MyApplicationData.SqlConnectionString))
+            {
+                DatabaseAccess = new SqlAccess(MyApplicationData.SqlConnectionString);
+            }
+            else
+            {
+                DatabaseAccess = new EmptyDatabaseAccess();
+            }
+#endif
+            FolderDialogService = new FolderDialogService();
+            DialogService = new ContentDialogService();
+
             this.InitializeComponent();
         }
 

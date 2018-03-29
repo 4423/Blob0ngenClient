@@ -98,6 +98,7 @@
     <Compile Include="Controls\AlternatingRowListView.cs" />
     <Compile Include="Helpers\PathExtensions.cs" />
     <Compile Include="Models\ContentDialogService.cs" />
+    <Compile Include="Models\EmptyDatabaseAccess.cs" />
     <Compile Include="Models\IDialogService.cs" />
     <Compile Include="Models\MusicDownloadManager.cs" />
     <Compile Include="Models\MyApplicationData.cs" />

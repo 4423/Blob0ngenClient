@@ -91,5 +91,22 @@ namespace Blob0ngenClient.ViewModels
 
         public string SasUriPlaceholder
             => "https://myaccount.blob.core.windows.net/sascontainer/sasblob.txt?sv=2015-04-05&st=2015-04-29T22%3A18%3A26Z&se=2015-04-30T02%3A23%3A26Z&sr=b&sp=rw&sip=168.1.5.60-168.1.5.70&spr=https&sig=Z%2FRHIX5Xcg0Mq2rqI3OlWTjEg2tYkboXr1P9ZUXDtkk%3D";
+
+        
+        #region SqlConnectionString 変更通知プロパティ
+        private string sqlConnectionString = MyApplicationData.SqlConnectionString;
+        public string SqlConnectionString
+        {
+            get { return sqlConnectionString; }
+            set
+            {
+                this.SetProperty(ref sqlConnectionString, value);
+                MyApplicationData.SqlConnectionString = value;
+            }
+        }
+        #endregion
+
+        public string SqlConnectionStringPlaceholder
+            => "Server=MSSQL1;Initial Catalog=BlessingSoftware;Integrated Security=true;";
     }
 }

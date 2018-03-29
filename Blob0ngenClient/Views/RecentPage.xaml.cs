@@ -26,11 +26,7 @@ namespace Blob0ngenClient.Views
     public sealed partial class RecentPage : Page
     {
         public RecentPageViewModel ViewModel { get; }
-#if DEBUG
-            = new RecentPageViewModel(new DummyAccess());
-#else
-            = new RecentPageViewModel(new SqlAccess(App.SqlDatabaseConnectionString));
-#endif
+            = new RecentPageViewModel(App.DatabaseAccess);
 
         public RecentPage()
         {
