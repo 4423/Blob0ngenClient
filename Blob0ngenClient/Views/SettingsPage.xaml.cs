@@ -25,11 +25,7 @@ namespace Blob0ngenClient.Views
     public sealed partial class SettingsPage : Page
     {
         public SettingsPageViewModel ViewModel { get; }
-#if DEBUG
-            = new SettingsPageViewModel(new Tests.DummyAccess(), new ContentDialogService());
-#else
-            = new SettingsPageViewModel(new SqlAccess(App.SqlDatabaseConnectionString), new ContentDialogService());
-#endif
+            = new SettingsPageViewModel(App.DatabaseAccess, App.DialogService);
 
         public SettingsPage()
         {

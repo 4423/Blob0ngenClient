@@ -29,11 +29,7 @@ namespace Blob0ngenClient.Views
     public sealed partial class MusicPage : Page
     {
         public MusicPageViewModel ViewModel { get; }
-#if DEBUG
-            = new MusicPageViewModel(new FolderDialogService(), new DummyAccess());
-#else
-            = new MusicPageViewModel(new FolderDialogService(), new SqlAccess(App.SqlDatabaseConnectionString));
-#endif
+            = new MusicPageViewModel(App.FolderDialogService, App.DatabaseAccess);
 
         public MusicPage()
         {
