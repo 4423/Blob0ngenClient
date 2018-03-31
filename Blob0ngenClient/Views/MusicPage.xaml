@@ -109,7 +109,7 @@
                                     <Image Grid.Row="0" Stretch="Uniform">
                                         <Image.Source>
                                             <BitmapImage DecodePixelWidth="300"
-                                                         UriSource="{Binding CoverArtPath, TargetNullValue={StaticResource defaultCoverArtUrl}}">
+                                                         UriSource="{x:Bind CoverArtPath, Mode=OneWay, Converter={StaticResource NullToDefaultCoverArtUriConverter}}">
                                             </BitmapImage>
                                         </Image.Source>
                                     </Image>

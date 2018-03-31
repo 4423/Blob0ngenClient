@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:prism="using:Prism.Unity.Windows"
     xmlns:local="using:Blob0ngenClient"
+    xmlns:converters="using:Blob0ngenClient.Converters"
     >
 
     <prism:PrismUnityApplication.Resources>
@@ -12,6 +13,9 @@
                 <ResourceDictionary Source="Themes/Generic.xaml"/>
                 <ResourceDictionary Source="Styles/Controls.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <x:String x:Key="DefaultCoverArtUri">ms-appx://Blob0ngenClient/Assets/NoImage.png</x:String>
+            <converters:NullToDefaultCoverArtUriConverter x:Key="NullToDefaultCoverArtUriConverter"
+                                                          DefaultCoverArtUri="{StaticResource DefaultCoverArtUri}"/>
         </ResourceDictionary>
     </prism:PrismUnityApplication.Resources>
 </prism:PrismUnityApplication>

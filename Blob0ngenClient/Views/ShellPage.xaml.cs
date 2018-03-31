@@ -23,9 +23,6 @@ namespace Blob0ngenClient.Views
 
         public ShellPage()
         {
-            string url = ResourceLoader.GetForCurrentView().GetString("DefaultCoverArtUrl");
-            Resources.Add("DefaultCoverArtUrl", url);
-
             this.InitializeComponent();
 
             ContentFrame.Navigate(typeof(MusicPage));

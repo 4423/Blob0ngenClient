@@ -97,6 +97,7 @@
     </Compile>
     <Compile Include="Controls\AlternatingRowListView.cs" />
     <Compile Include="Helpers\PathExtensions.cs" />
+    <Compile Include="Converters\NullToDefaultCoverArtUriConverter.cs" />
     <Compile Include="Models\ContentDialogService.cs" />
     <Compile Include="Models\EmptyDatabaseAccess.cs" />
     <Compile Include="Models\IDialogService.cs" />
@@ -146,6 +147,7 @@
     </PRIResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\NoImage.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

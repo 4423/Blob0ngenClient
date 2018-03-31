@@ -33,9 +33,6 @@ namespace Blob0ngenClient.Views
 
         public MusicPage()
         {
-            string url = ResourceLoader.GetForCurrentView().GetString("DefaultCoverArtUrl");
-            Resources.Add("defaultCoverArtUrl", url);
-
             this.InitializeComponent();
         }
     }
