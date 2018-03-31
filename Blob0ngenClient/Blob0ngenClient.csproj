@@ -142,9 +142,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <PRIResource Include="Properties\Resources.resw">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </PRIResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\NoImage.png" />
