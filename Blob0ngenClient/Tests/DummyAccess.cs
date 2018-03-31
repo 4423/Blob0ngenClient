@@ -21,7 +21,7 @@ namespace Blob0ngenClient.Tests
                 Album = "冴えない彼女の育てかた キャラクターイメージソング 澤村・スペンサー・英梨々",
                 Date = "2014",
                 TrackNumber = 1,
-                CoverArtPath = ResourceLoader.GetForCurrentView().GetString("eriri"),
+                CoverArtPath = "https://www.aniplexplus.com/res/Yobd1B?h=600",
                 BlobPath = "/image/dummy/dummy.png",
                 UploadedDate = DateTime.Now
             };
@@ -34,7 +34,7 @@ namespace Blob0ngenClient.Tests
                 Album = "冴えない彼女の育てかた キャラクターイメージソング 澤村・スペンサー・英梨々",
                 Date = "2014",
                 TrackNumber = 2,
-                CoverArtPath = ResourceLoader.GetForCurrentView().GetString("eriri"),
+                CoverArtPath = "https://www.aniplexplus.com/res/Yobd1B?h=600",
                 BlobPath = "/image/dummy/dummy.png",
                 UploadedDate = DateTime.Now
             };
@@ -47,7 +47,7 @@ namespace Blob0ngenClient.Tests
                 Album = "冴えない彼女の育てかた キャラクターイメージソング 加藤恵",
                 Date = "2014",
                 TrackNumber = 1,
-                CoverArtPath = ResourceLoader.GetForCurrentView().GetString("megumi"),                
+                CoverArtPath = "https://www.aniplexplus.com/res/CBGEBy?h=600",                
                 BlobPath = "/image/dummy/dummy.png",
                 UploadedDate = DateTime.Now
             };
@@ -60,7 +60,7 @@ namespace Blob0ngenClient.Tests
                 Album = "冴えない彼女の育てかた キャラクターイメージソング 加藤恵",
                 Date = "2014",
                 TrackNumber = 2,
-                CoverArtPath = ResourceLoader.GetForCurrentView().GetString("megumi"),
+                CoverArtPath = "https://www.aniplexplus.com/res/CBGEBy?h=600",                
                 BlobPath = "/image/dummy/dummy.png",
                 UploadedDate = DateTime.Now
             };
@@ -73,7 +73,7 @@ namespace Blob0ngenClient.Tests
                 Album = "冴えない彼女の育てかた キャラクターイメージソング 霞ヶ丘詩羽",
                 Date = "2014",
                 TrackNumber = 1,
-                CoverArtPath = ResourceLoader.GetForCurrentView().GetString("utaha"),
+                CoverArtPath = "https://www.aniplexplus.com/res/QMFxSU?h=600",
                 BlobPath = "/image/dummy/dummy.png",
                 UploadedDate = DateTime.Now
             };
@@ -86,7 +86,7 @@ namespace Blob0ngenClient.Tests
                 Album = "冴えない彼女の育てかた キャラクターイメージソング 霞ヶ丘詩羽",
                 Date = "2014",
                 TrackNumber = 2,
-                CoverArtPath = ResourceLoader.GetForCurrentView().GetString("utaha"),
+                CoverArtPath = "https://www.aniplexplus.com/res/QMFxSU?h=600",
                 BlobPath = "/image/dummy/dummy.png",
                 UploadedDate = DateTime.Now
             };
@@ -100,6 +100,32 @@ namespace Blob0ngenClient.Tests
                 Date = "2017",
                 TrackNumber = 12,
                 CoverArtPath = null,
+                BlobPath = "/image/dummy/dummy.png",
+                UploadedDate = DateTime.Now
+            };
+            yield return new Music()
+            {
+                ID = 7,
+                Title = "Cherish you",
+                Artist = "氷堂美智留(CV.矢作紗友里)",
+                AlbumArtist = "冴えない彼女の育てかた",
+                Album = "冴えない彼女の育てかた Character Song Collection",
+                Date = "2017",
+                TrackNumber = 8,
+                CoverArtPath = null,
+                BlobPath = "/image/dummy/dummy.png",
+                UploadedDate = DateTime.Now
+            };
+            yield return new Music()
+            {
+                ID = 8,
+                Title = "Daydreamer",
+                Artist = "氷堂美智留(CV.矢作紗友里)",
+                AlbumArtist = "冴えない彼女の育てかた",
+                Album = "冴えない彼女の育てかた Character Song Collection",
+                Date = "2017",
+                TrackNumber = 9,
+                CoverArtPath = "https://www.aniplexplus.com/res/9wONtJ?h=600",
                 BlobPath = "/image/dummy/dummy.png",
                 UploadedDate = DateTime.Now
             };
